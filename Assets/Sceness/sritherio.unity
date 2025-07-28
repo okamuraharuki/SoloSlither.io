@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b96b121657dd0458c0141d4266ee4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
+  _isActive: 0
   _minFeed: {fileID: 1842382966503488112, guid: 2b2ed99358c279446bc59b16eb875daa, type: 3}
   _feedPowers: 02000000050000000c000000
   _maxSpawnDistance: 20

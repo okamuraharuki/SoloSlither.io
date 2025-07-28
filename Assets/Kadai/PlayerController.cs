@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
         {
             _point += (int)f.FoodWeight;
             Destroy(f.gameObject);
+
+            var spr = Instantiate<SpriteRenderer>(_prefabBody, this.transform);
+            _listSprBody.Add(spr);
+            
+            spr.transform.localScale = _prefabBody.transform.localScale;
         }
     }
 
@@ -50,6 +55,9 @@ public class PlayerController : MonoBehaviour
         _point = 1;
 
         _col2D.SetCallback(GrowUp);
+        _lastPositions.Add(this.transform.position);
+
+        _listSprBody.Add(_prefabBody);
     }
 
     // Update is called once per frame
@@ -73,6 +81,23 @@ public class PlayerController : MonoBehaviour
         // 移動
         Vector3 move = new Vector3(normalX, normalY, 0) * _moveSpeed * Time.deltaTime;
         transform.position += move;
+
+        for(int i = _lastPositions.Count - 1; i > 0; i--)
+        {
+            if(i == 0)
+            {
+                _lastPositions[0] = transform.position;
+            }
+            else
+            {
+                _lastPositions[i] = _lastPositions[_lastPositions.Count - 1];
+            }
+        }
+        for(int i = 0;i < _listSprBody.Count; i++)
+        {
+            var sqr = _listSprBody[i];
+            ////
+        }
 
     }
     private void LateUpdate()
