@@ -12,7 +12,7 @@ public class WormManager : MonoBehaviour
 
     [SerializeField] private float _minBodyDistanceSqr = 0.5f;
 
-    [SerializeField] private float _distancebody = 0.1f;
+    [SerializeField] private float _distancebodys = 0.1f;
 
     [SerializeField] private GameObject _bodyPrefab;
     [SerializeField] private List<Transform> _bodyPositions = new List<Transform>();
@@ -39,16 +39,17 @@ public class WormManager : MonoBehaviour
         {
             for (int i = _bodyPositions.Count - 1; i > 0; i--)
             {
+                //ボディの最低作動可能距離なら動かす
                 if ((_bodyPositions[i - 1].position - _bodyPositions[i].position).sqrMagnitude > _minBodyDistanceSqr)
                 {
-                    _bodyPositions[i].position += (_bodyPositions[i - 1].position - _bodyPositions[i].position) * _distancebody;
+                    //ひとつ前のボディt
+                    _bodyPositions[i].position += (_bodyPositions[i - 1].position - _bodyPositions[i].position) * _distancebodys;
                 }
             }
-            _bodyPositions[0].position += (this.transform.position - _bodyPositions[0].position) * _distancebody;
+            _bodyPositions[0].position += (this.transform.position - _bodyPositions[0].position) * _distancebodys;
         }
     }
     //頭の直接の移動
-    // 2ベクトルの角度差を0~1に変換して代入 1/180＝0.005555...f
     protected void HeadMove(Vector3 moveVec)
     {
         transform.up = Vector3.Lerp(transform.up, moveVec, _rotationCoffecient);
